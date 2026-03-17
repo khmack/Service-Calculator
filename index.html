@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HKD Service Calculator</title>
+
+<style>
+body{
+font-family:Arial;
+max-width:700px;
+margin:auto;
+padding:30px;
+}
+
+h1{
+text-align:center;
+}
+
+label{
+display:block;
+margin-top:12px;
+}
+
+input,select{
+width:100%;
+padding:6px;
+font-size:14px;
+}
+
+button{
+margin-top:20px;
+padding:10px;
+font-size:16px;
+width:100%;
+background:#2c6faa;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.result{
+margin-top:25px;
+padding:15px;
+background:#f3f3f3;
+font-size:18px;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>HKD Service Calculator</h1>
+
+<label>Resort / City</label>
+<input id="resort">
+
+<label>Tech</label>
+<select id="tech">
+<option>Ken M.</option>
+<option>Other</option>
+</select>
+
+<label>Service Type</label>
+<select id="serviceType">
+<option>Plant Scheduled Service</option>
+<option>Inspection</option>
+</select>
+
+<label># of KLIK / REV Autos</label>
+<input id="klik" type="number" value="0">
+
+<label># of HKD Fan Autos</label>
+<input id="fan" type="number" value="0">
+
+<label># Pumps / Compressors</label>
+<input id="pumps" type="number" value="0">
+
+<label>Estimated Support Hours</label>
+<input id="hours" type="number" value="10">
+
+<label>Lodging Provided?</label>
+<select id="lodging">
+<option>No</option>
+<option>Yes</option>
+</select>
+
+<label>Resort Tech Assistance?</label>
+<select id="techAssist">
+<option>No</option>
+<option>Yes</option>
+</select>
+
+<label>Prior Shutdown by HKD?</label>
+<select id="shutdown">
+<option>No</option>
+<option>Yes</option>
+</select>
+
+<button onclick="calculate()">Calculate Service Cost</button>
+
+<div class="result" id="result"></div>
+
+
+<script>
+
+/* =========================================
+SERVICE DATA (copied from Service Data tab)
+Edit these values anytime
+========================================= */
+
+const HOURLY_RATE = 150
+const AUTO_INSPECTION_COST = 25
+const FAN_INSPECTION_COST = 30
+const PUMP_INSPECTION_COST = 40
+const TRAVEL_RATE_PER_MILE = 0.7
+
+const HOTEL_COST = 180
+
+/* ========================================= */
+
+function calculate(){
+
+let klik = Number(document.getElementById("klik").value)
+let fan = Number(document.getElementById("fan").value)
+let pumps = Number(document.getElementById("pumps").value)
+let hours = Number(document.getElementById("hours").value)
+
+let lodging = document.getElementById("lodging").value
+let techAssist = document.getElementById("techAssist").value
+
+/* Inspection costs */
+
+let klikCost = klik * AUTO_INSPECTION_COST
+let fanCost = fan * FAN_INSPECTION_COST
+let pumpCost = pumps * PUMP_INSPECTION_COST
+
+/* Labor */
+
+let laborCost = hours * HOURLY_RATE
+
+/* Lodging */
+
+let hotel = 0
+
+if(lodging == "No"){
+hotel = HOTEL_COST
+}
+
+/* Discount if resort provides tech */
+
+let assistDiscount = 0
+
+if(techAssist == "Yes"){
+assistDiscount = laborCost * 0.15
+}
+
+/* Total */
+
+let total =
+klikCost +
+fanCost +
+pumpCost +
+laborCost +
+hotel -
+assistDiscount
+
+document.getElementById("result").innerHTML =
+
+"<b>Inspection Costs</b><br>" +
+"KLIK / REV: $" + klikCost.toFixed(2) + "<br>" +
+"Fan Guns: $" + fanCost.toFixed(2) + "<br>" +
+"Pumps: $" + pumpCost.toFixed(2) + "<br><br>" +
+
+"<b>Labor</b><br>" +
+"$" + laborCost.toFixed(2) + "<br><br>" +
+
+"<b>Total Estimated Service Cost</b><br>" +
+"<h2>$" + total.toFixed(2) + "</h2>"
+
+}
+
+</script>
+
+</body>
+</html>
