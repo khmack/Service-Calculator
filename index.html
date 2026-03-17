@@ -109,14 +109,15 @@ SERVICE DATA (copied from Service Data tab)
 Edit these values anytime
 ========================================= */
 
-const HOURLY_RATE = 156
-const AUTO_INSPECTION_COST = 25
-const FAN_INSPECTION_COST = 30
-const PUMP_INSPECTION_COST = 40
-const TRAVEL_RATE_PER_MILE = 1.0
-
-const HOTEL_COST = 350
-
+const SERVICE_DATA = {
+  hourlyRate: 150,
+  autoInspection: 25,
+  fanInspection: 30,
+  pumpInspection: 40,
+  hotelCost: 180,
+  travelRatePerMile: 0.7,
+  techAssistDiscount: 0.15
+};
 /* ========================================= */
 
 function calculate(){
