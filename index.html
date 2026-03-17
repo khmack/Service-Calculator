@@ -58,7 +58,7 @@ font-size:18px;
 <label>Tech</label>
 <select id="tech">
 <option>Ken M.</option>
-<option>Other</option>
+<option>Caiden S.</option>
 </select>
 
 <label>Service Type</label>
@@ -109,13 +109,13 @@ SERVICE DATA (copied from Service Data tab)
 Edit these values anytime
 ========================================= */
 
-const HOURLY_RATE = 150
+const HOURLY_RATE = 156
 const AUTO_INSPECTION_COST = 25
 const FAN_INSPECTION_COST = 30
 const PUMP_INSPECTION_COST = 40
-const TRAVEL_RATE_PER_MILE = 0.7
+const TRAVEL_RATE_PER_MILE = 1.0
 
-const HOTEL_COST = 180
+const HOTEL_COST = 350
 
 /* ========================================= */
 
@@ -152,7 +152,7 @@ hotel = HOTEL_COST
 let assistDiscount = 0
 
 if(techAssist == "Yes"){
-assistDiscount = laborCost * 0.15
+assistDiscount = laborCost * 0.10
 }
 
 /* Total */
